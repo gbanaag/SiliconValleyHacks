@@ -14,10 +14,14 @@ public class SuperAwesomeClass {
 		String all = null;
 		try {
 		Document doc = Jsoup.connect("https://www.timeanddate.com/weather/").userAgent("Chrome/81.0").get();
-		Elements temp = doc.select("div.tb-scroll");
-		for (Element names:temp) {
-			all = names.getElementsByTag("tbody").first().text();
-			}
+		Element body = doc.body();
+		Elements table = body.getElementsByTag("tbody");
+		for (Element names:table.get(0).children()) {
+				System.out.println("cities = " + names.child(0).text());
+				System.out.println("temp = " + names.child(3).text());
+
+				// all = names.getElementsByTag("tbody").first().text() + "\n";
+		}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -60,16 +64,6 @@ public class SuperAwesomeClass {
 		
 		
 		System.out.println(Cities);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 	}
 }
